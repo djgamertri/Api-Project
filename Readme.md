@@ -12,43 +12,43 @@
 >Aqui encontrara las capturas de pantalla de los diferentes puntos establecidos durante el TALLER 1 Creación API falsa
 
 ## Doctor
-![Alt text](image-1.png)
+![Alt text](img/image-1.png)
 
 ## Paciente
-![Alt text](image-2.png)
+![Alt text](img/image-2.png)
 
 ## Login
-![Alt text](image-3.png)
+![Alt text](img/image-3.png)
 
 ## Registro de servicios
-![Alt text](image-4.png)
+![Alt text](img/image-4.png)
 
-![Alt text](image-5.png)
+![Alt text](img/image-5.png)
 
 ## Registro de citas
-![Alt text](image-6.png)
+![Alt text](img/image-6.png)
 
-![Alt text](image-7.png)
+![Alt text](img/image-7.png)
 
 ## Registro de agenda
-![Alt text](image-8.png)
+![Alt text](img/image-8.png)
 
 ## Ordenamiento por precio
-![Alt text](image-9.png)
+![Alt text](img/image-9.png)
 
 ## Busqueda por ID
-![Alt text](image-10.png)
+![Alt text](img/image-10.png)
 
 ## Busqueda por cita realizada
-![Alt text](image-11.png)
+![Alt text](img/image-11.png)
 
 ## Update
-![Alt text](image-12.png)
+![Alt text](img/image-12.png)
 
-![Alt text](image-13.png)
+![Alt text](img/image-13.png)
 
 ## Eliminar
-![Alt text](image-14.png)
+![Alt text](img/image-14.png)
 
 ## Filtro nuevo
-![Alt text](image-15.png)
+![Alt text](img/image-15.png)
