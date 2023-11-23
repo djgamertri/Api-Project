@@ -47,12 +47,17 @@ export const GetOneByDoctorMin = async (req, res) => {
 
 export const NewAgenda = async (req, res) => {
   try {
-    const { doctor, appointment } = req.body
+    const { doctor, appointments } = req.body
     const agenda = new Agenda({
       doctor,
-      appointment
+      appointments
     })
     const newAgenda = await agenda.save()
+
+    for (const appointmentId of newAgenda.appointments) {
+      await Agenda.agregarCitaADoctor(doctor.id, appointmentId)
+    }
+
     res.status(201).json(newAgenda)
   } catch (error) {
 

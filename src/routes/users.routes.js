@@ -1,9 +1,13 @@
 import { Router } from 'express'
-import { GetAll, GetOne, DeleteUser, UpdateUser } from '../controllers/user.controller.js'
+import { GetAll, GetOne, DeleteUser, UpdateUser, GetDoctors, GetPatients } from '../controllers/user.controller.js'
 
 const router = Router()
 
 router.get('/users', GetAll)
+
+router.get('/doctor', GetDoctors)
+
+router.get('/patients', GetPatients)
 
 router.get('/users/:id', GetOne)
 

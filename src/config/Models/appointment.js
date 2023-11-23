@@ -1,23 +1,51 @@
 import mongoose from 'mongoose'
 
+const doctorSchema = new mongoose.Schema({
+  id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  }
+})
+
+const patientSchema = new mongoose.Schema({
+  id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  }
+})
+
 const appointmentSchema = new mongoose.Schema({
-  date: {
+  dateStart: {
     type: Date,
-    require: true
+    required: true
   },
-  doctor: {
-    type: String,
-    require: true
+  dateEnd: {
+    type: Date
   },
-  patient: {
-    type: String,
-    require: true
-  },
+  doctor: doctorSchema,
+  patient: patientSchema,
   service: {
-    type: Array,
-    require: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Service',
+    required: true
   },
-  createAt: {
+  status: {
+    type: String,
+    enum: ['Realizada', 'En espera', 'Cancelada'],
+    default: 'En espera',
+    required: true
+  },
+  createdAt: {
     type: Date,
     default: Date.now
   }

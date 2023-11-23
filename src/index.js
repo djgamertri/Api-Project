@@ -1,4 +1,5 @@
 import AuthRoutes from './routes/auth.routes.js'
+import utilsRoutes from './routes/utils.routes.js'
 import agendaRoutes from './routes/agenda.routes.js'
 import appointmentRoutes from './routes/appointment.routes.js'
 import serviceRoutes from './routes/service.routes.js'
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 app.use(AuthRoutes)
+app.use(utilsRoutes)
 app.use(agendaRoutes)
 app.use(appointmentRoutes)
 app.use(serviceRoutes)

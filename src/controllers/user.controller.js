@@ -20,6 +20,26 @@ export const GetOne = async (req, res) => {
   }
 }
 
+export const GetDoctors = async (req, res) => {
+  try {
+    const doctors = await User.find({ role: 'Doctor' })
+    res.json(doctors)
+  } catch (error) {
+    console.error('Error al obtener los doctores:', error)
+    res.status(500).json({ message: 'Error en el servidor' })
+  }
+}
+
+export const GetPatients = async (req, res) => {
+  try {
+    const doctors = await User.find({ role: 'Patient' })
+    res.json(doctors)
+  } catch (error) {
+    console.error('Error al obtener los doctores:', error)
+    res.status(500).json({ message: 'Error en el servidor' })
+  }
+}
+
 export const UpdateUser = async (req, res) => {
   const { name, email, role, password } = req.body
   try {

@@ -27,8 +27,17 @@ export const Login = async (req, res) => {
 }
 
 export const Register = async (req, res) => {
-  const { name, email, role, password } = req.body
+  let { name, email, role, password } = req.body
+  const userFound = await User.findOne({ email })
+  if (userFound) {
+    return res.status(400).json({
+      message: 'Email already registered'
+    })
+  }
   try {
+    if (role === null || role !== ('Doctor' || 'Patient')) {
+      role = 'Patient'
+    }
     const user = new User({
       name,
       email,
@@ -40,6 +49,6 @@ export const Register = async (req, res) => {
     res.status(201).json(newUser)
   } catch (error) {
     console.error('Error al obtener los users:', error)
-    res.status(500).json({ message: 'Error en el servidor' })
+    res.status(500).json({ message: error.message })
   }
 }

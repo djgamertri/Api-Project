@@ -7,16 +7,24 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    require: true
+    require: true,
+    unique: true
   },
   role: {
     type: String,
-    enum: ['doctor', 'patient'],
+    enum: ['Doctor', 'Patient'],
+    default: 'Patient',
     require: true
   },
   password: {
     type: String,
     require: true
+  },
+  status: {
+    type: String,
+    enum: ['Activo', 'Inactivo'],
+    default: 'Activo',
+    required: true
   },
   createAt: {
     type: Date,

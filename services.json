@@ -1,0 +1,33 @@
+[
+    {
+      "title": "Consulta General",
+      "description": "Revisión médica de rutina",
+      "price": 50,
+      "TimeAprox": 30
+    },
+    {
+      "title": "Exámen de Sangre",
+      "description": "Análisis de sangre para evaluar la salud general",
+      "price": 80,
+      "TimeAprox": 45
+    },
+    {
+      "title": "Vacunación Anual",
+      "description": "Inmunización contra enfermedades comunes",
+      "price": 60,
+      "TimeAprox": 20
+    },
+    {
+      "title": "Consulta Especializada",
+      "description": "Consulta con un especialista en una rama específica",
+      "price": 75,
+      "TimeAprox": 40
+    },
+    {
+      "title": "Radiografía",
+      "description": "Estudio por imágenes para diagnóstico",
+      "price": 90,
+      "TimeAprox": 60
+    }
+]
+  
