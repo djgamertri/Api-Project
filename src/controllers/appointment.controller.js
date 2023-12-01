@@ -41,7 +41,24 @@ export const GetAll = async (req, res) => {
 
 export const GetOne = async (req, res) => {
   try {
-    const appointment = await Appointment.findById(req.params.id)
+    const appointmentId = req.params.id
+    const appointment = await Appointment.findOne({ _id: appointmentId })
+
+    if (!appointment) {
+      return res.status(404).json({ message: 'Cita no encontrada' })
+    }
+
+    res.json(appointment)
+  } catch (error) {
+    console.error('Error al obtener la cita:', error)
+    res.status(500).json({ message: 'Error en el servidor' })
+  }
+}
+
+export const GetOneByDoctor = async (req, res) => {
+  try {
+    const Doctor = req.params.id
+    const appointment = await Appointment.find({ 'doctor.id': Doctor })
     res.json(appointment)
   } catch (error) {
     console.error('Error al obtener los appointment:', error)
@@ -73,6 +90,22 @@ export const NewAppointment = async (req, res) => {
 
     const dateEnd = calculateEndDate(dateStart, foundService.TimeAprox)
 
+    const existingAppointment = await Appointment.findOne({
+      'doctor.id': doctor,
+      $or: [
+        {
+          dateStart: { $gte: dateStart, $lt: dateEnd }
+        },
+        {
+          dateEnd: { $gt: dateStart, $lte: dateEnd }
+        }
+      ]
+    })
+
+    if (existingAppointment) {
+      return res.status(500).json({ message: 'Ya hay una cita asignada en ese horario para ese doctor' })
+    }
+
     const appointment = new Appointment({
       dateStart,
       dateEnd,
@@ -95,11 +128,34 @@ export const NewAppointment = async (req, res) => {
 
 export const UpdateAppointment = async (req, res) => {
   try {
-    const { date, doctor, patient, service } = req.body
+    const { dateStart, doctor, patient, service, status } = req.body
+    const foundService = await Service.findById(service)
+
+    if (!doctor || !patient) {
+      return res.status(404).json({ message: 'Doctor o paciente no encontrado' })
+    }
+
+    const dateEnd = calculateEndDate(dateStart, foundService.TimeAprox)
+
+    const existingAppointment = await Appointment.findOne({
+      'doctor.id': doctor.id,
+      $or: [
+        {
+          dateStart: { $gte: dateStart, $lt: dateEnd }
+        },
+        {
+          dateEnd: { $gt: dateStart, $lte: dateEnd }
+        }
+      ]
+    })
+
+    if (existingAppointment) {
+      return res.status(500).json({ message: 'Ya hay una cita asignada en ese horario para ese doctor' })
+    }
 
     await Appointment.findByIdAndUpdate(
       { _id: req.params.id },
-      { date, doctor, patient, service },
+      { dateStart, doctor, patient, service, status, dateEnd },
       { new: true }
     )
     res.json({ message: 'Appointment Updated' })

@@ -9,6 +9,7 @@ import express from 'express'
 import cors from 'cors'
 import { MongoDB, PORT } from './config/Config.js'
 import mongoose from 'mongoose'
+import logger from 'morgan'
 
 const app = express()
 
@@ -25,6 +26,7 @@ db.once('open', () => {
 })
 
 app.use(cors())
+app.use(logger('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 

@@ -1,4 +1,5 @@
 import User from '../config/Models/User.js'
+import Agenda from '../config/Models/agenda.js'
 
 export const Login = async (req, res) => {
   const { email, password } = req.body
@@ -38,12 +39,25 @@ export const Register = async (req, res) => {
     if (role === null || role !== ('Doctor' || 'Patient')) {
       role = 'Patient'
     }
+
     const user = new User({
       name,
       email,
       role,
       password
     })
+
+    if (role === 'Doctor') {
+      const newAgenda = new Agenda({
+        doctor: {
+          id: user._id,
+          name: user.name
+        }
+      })
+
+      await newAgenda.save()
+    }
+
     console.log(user)
     const newUser = await user.save()
     res.status(201).json(newUser)
