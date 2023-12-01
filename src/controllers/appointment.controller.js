@@ -3,25 +3,15 @@ import Agenda from '../config/Models/agenda.js'
 import Appointment from '../config/Models/appointment.js'
 import Service from '../config/Models/service.js'
 
-// Función para calcular dateEnd basada en la duración total de los servicios
 const calculateEndDate = (dateStart, totalDuration) => {
-  // Verifica si dateStart es una cadena de fecha válida
   if (!dateStart || isNaN(new Date(dateStart).getTime())) {
     throw new Error('Invalid dateStart')
   }
-
-  // Verifica si totalDuration es un número válido
   if (typeof totalDuration !== 'number' || isNaN(totalDuration) || totalDuration < 0) {
     throw new Error('Invalid totalDuration')
   }
-
-  // Clona la fecha inicial para evitar modificarla directamente
   let endDate = new Date(dateStart)
-
-  // Suma la duración total al dateEnd
   endDate = new Date(endDate.getTime() + totalDuration * 60000)
-
-  // Verifica si endDate es una fecha válida
   if (isNaN(endDate.getTime())) {
     throw new Error('Invalid endDate')
   }
